@@ -36,7 +36,7 @@ const AllCampusesView = (props) => {
         </AppBar>
     There are no campuses.</div>;
   }
-  
+
   return (
     <div>
       <AppBar position="static" elevation={0} className="AppBar">
@@ -68,6 +68,9 @@ const AllCampusesView = (props) => {
           <p>{campus.description}</p>
         </div>
       ))}
+      <Link to={`/newcampus`}>
+        <button>Add New Campus</button>
+      </Link>
     </div>
   );
 };
