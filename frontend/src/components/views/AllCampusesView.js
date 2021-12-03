@@ -10,9 +10,33 @@ import '../css/Navbar.css'
 
 
 const AllCampusesView = (props) => {
+
+  const { deleteCampus } = props;
+
   if (!props.allCampuses.length) {
-    return <div>There are no campuses.</div>;
+    return <div>
+        <AppBar position="static" elevation={0} className="AppBar">
+          <Toolbar>
+            <Typography variant="h6" className="title">
+              CRUD App
+            </Typography>
+
+            <Link className="id" to={'/campuses'} >
+              <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
+                All Campuses
+              </Button>
+            </Link>
+
+            <Link className="id" to={'/students'} >
+              <Button variant="contained" color="primary">
+                All Students
+              </Button>
+            </Link>
+          </Toolbar>
+        </AppBar>
+    There are no campuses.</div>;
   }
+  
   return (
     <div>
       <AppBar position="static" elevation={0} className="AppBar">
@@ -39,6 +63,7 @@ const AllCampusesView = (props) => {
           <Link to={`/campus/${campus.id}`}>
             <h1>{campus.name}</h1>
           </Link>
+          <button onClick={() => deleteCampus(campus.id)}>Delete</button>
           <p>{campus.address}</p>
           <p>{campus.description}</p>
         </div>
