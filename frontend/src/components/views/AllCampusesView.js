@@ -12,7 +12,7 @@ import '../css/Navbar.css'
 const AllCampusesView = (props) => {
 
   const { deleteCampus } = props;
-  
+
   if (!props.allCampuses.length) {
     return <div>
         <AppBar position="static" elevation={0} className="AppBar">
@@ -34,7 +34,11 @@ const AllCampusesView = (props) => {
             </Link>
           </Toolbar>
         </AppBar>
-    There are no campuses.</div>;
+        <h1>There are no campuses.</h1>
+        <Link to={`/newcampus`}>
+          <button>Add New Campus</button>
+        </Link>
+    </div>;
   }
 
   return (
@@ -68,9 +72,6 @@ const AllCampusesView = (props) => {
           <p>{campus.description}</p>
         </div>
       ))}
-      <Link to={`/newcampus`}>
-        <button>Add New Campus</button>
-      </Link>
     </div>
   );
 };

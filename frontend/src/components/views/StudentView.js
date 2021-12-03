@@ -9,6 +9,22 @@ import '../css/Navbar.css'
 
 const StudentView = (props) => {
   const { student } = props;
+
+  function checkCampus(e) {
+    if(e !== null) {
+      return(
+        <Link to={`/campus/${student.campus.id}`}>
+            <h3>{student.campus.name}</h3>
+        </Link>
+      )
+    }
+    else {
+      return(
+        <h3>Not a student at any campus</h3>
+      )
+    }
+  }
+
   return (
     <div>
       <AppBar position="static" elevation={0} className="AppBar">
@@ -32,9 +48,7 @@ const StudentView = (props) => {
         </AppBar>
       <h1>{student.firstname + " " + student.lastname}</h1>
       <img src={student.imageUrl} alt="profile"></img>
-      <Link to={`/campus/${student.campus.id}`}>
-            <h3>{student.campus.name}</h3>
-      </Link>
+      {checkCampus(student.campus)}
       <h3>{student.email}</h3>
       <h3>{student.gpa}</h3>
     </div>
