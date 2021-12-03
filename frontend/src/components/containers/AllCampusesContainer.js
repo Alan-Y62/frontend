@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { fetchAllCampusesThunk, deleteCampusThunk } from "../../store/thunks";
-import { AllCampusesView } from "../views";
+import AllCampusesView from "../views/AllCampusesView";
 
 class AllCampusesContainer extends Component {
   componentDidMount() {
@@ -15,6 +15,7 @@ class AllCampusesContainer extends Component {
     return (
       <AllCampusesView
         allCampuses={this.props.allCampuses}
+        deleteCampus={this.props.deleteCampus}
       />
     );
   }

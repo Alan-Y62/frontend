@@ -12,7 +12,7 @@ import '../css/Navbar.css'
 const AllCampusesView = (props) => {
 
   const { deleteCampus } = props;
-
+  
   if (!props.allCampuses.length) {
     return <div>
         <AppBar position="static" elevation={0} className="AppBar">
