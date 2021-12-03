@@ -1,0 +1,17 @@
+.AppBar {
+    background-color: #11153e !important;
+    box-shadow: none
+}
+
+.title {
+    flex-grow: 1 !important; 
+    text-align: left !important;
+    font-weight: bold !important;
+    font-family: Courier, sans-serif !important;
+    font-size: 35px !important;
+    color: #CDDC39;
+}
+
+.links {
+    text-decoration: 'none'
+}

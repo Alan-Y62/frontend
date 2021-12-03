@@ -30,7 +30,9 @@ class NewStudentContainer extends Component {
         let student = {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
-            campusId: this.state.campusId
+            email: this.state.email,
+            campusId: this.state.campusId,
+            gpa: this.state.gpa
         };
         
         let newStudent = await this.props.addStudent(student);

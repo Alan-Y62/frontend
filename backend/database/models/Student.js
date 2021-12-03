@@ -11,8 +11,17 @@ const Student = db.define("student", {
   lastname: {
     type: Sequelize.STRING,
     allowNull: false
-  }
+  },
 
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+
+  imageUrl: {
+    type: Sequelize.TEXT,
+    defaultValue: "https://icons.iconarchive.com/icons/papirus-team/papirus-status/128/avatar-default-icon.png"
+  }
 });
 
 module.exports = Student;

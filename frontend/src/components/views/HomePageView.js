@@ -3,7 +3,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-
+import image from '../images/stckimg.png';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
@@ -25,9 +25,12 @@ const useStyles = makeStyles(theme => ({
   greeting:{
     display: 'flex',
     justifyContent: 'center',
-    backgroundColor: 'white',
-    width: "50%",
+    backgroundImage: `url(${image})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100% 100%',
+    width: "100%",
     margin: "auto",
+    height: "93.6vh"
   },
   links:{
     textDecoration: 'none',
