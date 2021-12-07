@@ -6,9 +6,10 @@ import Button from '@material-ui/core/Button';
 import { Link } from "react-router-dom";
 
 import '../css/Navbar.css'
+import '../css/Singlecamp.css'
 
 const CampusView = (props) => {
-  const {campus} = props;
+  const {campus, deleteStudent} = props;
   return (
     <div>
     <AppBar position="static" elevation={0} className="AppBar">
@@ -29,21 +30,31 @@ const CampusView = (props) => {
               </Button>
             </Link>
           </Toolbar>
-        </AppBar>   
-      <h1>{campus.name}</h1>
-      <p>{campus.description}</p>
-      <img src={campus.imageUrl} alt="campus"></img>
-      <p>{campus.address}</p>
-      <ul>
-      {campus.students.map( student => {
-        let name = student.firstname + " " + student.lastname;
-        return (
-          <Link to={`/student/${student.id}`}>
-            <li key={student.id}>{name}</li>
-          </Link>
-        );
-      })}
-      </ul>
+        </AppBar>
+      <div className="row">
+        <div className="col">
+          <h1>{campus.name}</h1>
+          <p>{campus.description}</p>
+          <img src={campus.imageUrl} style={{width: 40+'vw', height: 50+'vh'}} alt="campus"></img>
+          <p>{campus.address}</p>
+        </div>
+        <div className="col">
+          <p>List of Students at this campus</p>
+          <ul>
+          {campus.students.map( student => {
+            let name = student.firstname + " " + student.lastname;
+            return (
+              <div>
+                <Link to={`/student/${student.id}`}>
+                  <li key={student.id}>{name}</li>
+                </Link>
+                <button onClick={() => deleteStudent(student.id)}>Delete</button>
+              </div>
+            );
+          })}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 
