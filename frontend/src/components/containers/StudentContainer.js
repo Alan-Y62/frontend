@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchStudentThunk, editStudentThunk } from "../../store/thunks";
 import { StudentView } from "../views";
+import { EditStudentView } from "../views";
 import { Redirect } from 'react-router-dom';
 
 
@@ -17,7 +18,8 @@ class StudentContainer extends Component {
       campusId: null,
       gpa: null,
       redirect: false, 
-      redirectId: null
+      redirectId: null,
+      edit: false
     };
   }
 
@@ -32,19 +34,29 @@ class StudentContainer extends Component {
     });
   }
 
+  handleEdit = () => {
+    if(this.state.edit) {
+      this.setState({
+        edit: false
+      })
+    }
+    else {
+      this.setState({
+        edit: true
+      })
+    }
+  }
+
   handleSubmit = async event => {
     event.preventDefault();
-    
     let student = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
-      imageurl: this.state.imageurl,
       email: this.state.email,
       campusId: this.state.campusId,
       gpa: this.state.gpa
     };
-  
-    let editStudent = await this.props.editStudent(student);
+    await this.props.editStudent(student);
 
     this.setState({
       redirect: true,
@@ -53,18 +65,23 @@ class StudentContainer extends Component {
   }
 
   render() {
-    console.log(this.props)
-    if(this.state.redirect) {
-      return (<Redirect to={`/students`}/>)
-    }
-    return (
-      
-      <StudentView 
+    if(this.state.edit) {
+      return (<EditStudentView
         student={this.props.student}
-        handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
+        handleEdit={this.handleEdit}
       />
-    );
+      )
+    }
+    else {
+      return (  
+        <StudentView 
+          student={this.props.student}
+          handleEdit={this.handleEdit}
+        />
+      );
+    }
   }
 }
 
@@ -79,7 +96,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchStudent: (id) => dispatch(fetchStudentThunk(id)),
-    editStudent: (id) => dispatch(editStudentThunk(id))
+    editStudent: (student) => dispatch(editStudentThunk(student))
   };
 };
 
