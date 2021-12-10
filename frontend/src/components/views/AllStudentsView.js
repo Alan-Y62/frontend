@@ -70,8 +70,8 @@ const AllStudentsView = (props) => {
           </Link>
           <button className="btn btn-danger" onClick={() => deleteStudent(student.id)}>X</button>
           <br/>
-          <img src={student.imageUrl} alt="img crashed" style={{height: 5+"%", width: 5+"%"}}></img>
-          <br/><br/><br/><br/>
+          <img src={student.imageUrl} alt="img crashed" style={{height: 100+"px", width: 100+"px"}}></img>
+          <br/><br/>
           </div>
           
         );

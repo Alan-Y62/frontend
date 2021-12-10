@@ -11,12 +11,12 @@ class StudentContainer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      firstname: "", 
-      lastname: "",
-      imageurl: "",
-      email: "",
-      campusId: null,
-      gpa: null,
+      firstname: this.props.match.firstname, 
+      lastname: this.props.match.lastname,
+      imageUrl: this.props.match.imageUrl,
+      email: this.props.match.email,
+      campusId: this.props.match.campusId,
+      gpa: this.props.match.gpa,
       redirect: false, 
       redirectId: null,
       edit: false
@@ -49,9 +49,16 @@ class StudentContainer extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
+    if(this.state.campusId === "") {
+      this.setState({
+        campusId: null
+      })
+    }
     let student = {
+      id: this.props.match.params.id,
       firstname: this.state.firstname,
       lastname: this.state.lastname,
+      imageUrl: this.state.imageUrl,
       email: this.state.email,
       campusId: this.state.campusId,
       gpa: this.state.gpa
@@ -60,11 +67,14 @@ class StudentContainer extends Component {
 
     this.setState({
       redirect: true,
-      redirectId: this.props.match.params.id
+      redirectId: student.id
     });
   }
 
   render() {
+    if(this.state.redirect) {
+      return (<Redirect to={`/students`}/>)
+    }
     if(this.state.edit) {
       return (<EditStudentView
         student={this.props.student}

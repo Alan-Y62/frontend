@@ -24,40 +24,6 @@ const StudentView = (props) => {
       )
     }
   }
-    // <div>
-    //   <h1>Name: {student.firstname + " " + student.lastname}</h1>
-    //   <img src={student.imageUrl} alt="profile"></img>
-    //   {checkCampus(student.campus)}
-    //   <h3>Email: {student.email}</h3>
-    //   <h3>GPA: {student.gpa}</h3>
-    //   <form id="edit-stud" onSubmit={handleSubmit}>
-    //       <label> First Name: 
-    //         <input type="text" name="firstname" onChange ={(e) => handleChange(e)}></input>
-    //       </label>
-    //       <br/>
-    //       <label> Last Name: 
-    //         <input type="text" name="lastname" onChange ={(e) => handleChange(e)}></input>
-    //       </label>
-    //       <br/>
-    //       <label> ImageUrl: 
-    //         <input type="text" name="imageurl" onChange ={(e) => handleChange(e)}></input>
-    //       </label>
-    //       <br/>
-    //       <label> Email: 
-    //         <input type="email" name="email" onChange ={(e) => handleChange(e)}></input>
-    //       </label>
-    //       <br/>
-    //       <label> Campus: 
-    //         <input type="text" name="campusId" onChange ={(e) => handleChange(e)}></input>
-    //       </label>
-    //       <br/>
-    //       <label> GPA: 
-    //         <input type="number" min="0.0" max="4.0" step=".1" name="gpa" onChange ={(e) => handleChange(e)}></input>
-    //       </label>
-    //       <br/>
-    //       <button type="submit">Submit</button>
-    //     </form>
-    //   </div>
   return (
     <div>
       <AppBar position="static" elevation={0} className="AppBar">
