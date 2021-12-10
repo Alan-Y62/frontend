@@ -62,16 +62,21 @@ const AllCampusesView = (props) => {
             </Link>
           </Toolbar>
         </AppBar>
-      {props.allCampuses.map((campus) => (
-        <div key={campus.id}>
-          <Link to={`/campus/${campus.id}`}>
-            <h1>{campus.name}</h1>
-          </Link>
-          <button onClick={() => deleteCampus(campus.id)}>Delete</button>
-          <p>{campus.address}</p>
-          <p>{campus.description}</p>
+        <div>
+          {props.allCampuses.map((campus) => (
+            <div key={campus.id}> 
+              <Link to={`/campus/${campus.id}`}>
+                <h1>{campus.name}</h1>
+              </Link>
+              <span>Image: <br/> </span>
+              <img src={campus.imageUrl} alt="img crashed" style={{height: 30+"%", width: 30+"%"}}></img>
+              <br/>
+              <p>Address: {campus.address}</p>
+              <p>Description: {campus.description}</p>
+              <button onClick={() => deleteCampus(campus.id)}>Delete</button>
+            </div>
+          ))}
         </div>
-      ))}
     </div>
   );
 };

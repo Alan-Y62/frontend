@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import '../css/Navbar.css'
 
 const AllStudentsView = (props) => {
-  const {students} = props;
+  const {students, deleteStudent} = props;
 
   if (!students.length) {
     return (
@@ -68,6 +68,9 @@ const AllStudentsView = (props) => {
           <Link to={`/student/${student.id}`}>
             <h1>{name}</h1>
           </Link>
+          <img src={student.imageUrl} alt="img crashed" style={{height: 20+"%", width: 20+"%"}}></img>
+          <br/>
+          <button onClick={() => deleteStudent(student.id)}>X</button>
           </div>
         );
       }

@@ -12,6 +12,7 @@ import { withRouter } from "react-router-dom";
 
 import { 
   fetchAllStudentsThunk,
+  deleteStudentThunk
 } from '../../store/thunks';
 
 import AllStudentsView from '../views/AllStudentsView';
@@ -42,6 +43,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
+    deleteStudent: (id) => dispatch(deleteStudentThunk(id))
   };
 };
 

@@ -9,7 +9,7 @@ import '../css/Navbar.css'
 import '../css/Singlecamp.css'
 
 const CampusView = (props) => {
-  const {campus, deleteStudent} = props;
+  const {campus, students} = props;
   return (
     <div>
     <AppBar position="static" elevation={0} className="AppBar">
@@ -41,14 +41,13 @@ const CampusView = (props) => {
         <div className="col">
           <p>List of Students at this campus</p>
           <ul>
-          {campus.students.map( student => {
+          {students.map( student => {
             let name = student.firstname + " " + student.lastname;
             return (
-              <div>
+              <div key={student.id}>
                 <Link to={`/student/${student.id}`}>
                   <li key={student.id}>{name}</li>
                 </Link>
-                <button onClick={() => deleteStudent(student.id)}>Delete</button>
               </div>
             );
           })}
