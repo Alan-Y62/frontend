@@ -30,7 +30,8 @@ const EditStudentView = (props) => {
             </Link>
           </Toolbar>
         </AppBar>
-        <div> 
+        <div style={{marginLeft: 10+"vw", marginTop: 5+"vh"}}> 
+            <h1>Edit Form</h1>
             <form id="edit-stud" onSubmit={handleSubmit}>
                 <label style= {{color:'#11153e', fontWeight: 'bold'}}>First Name: </label>
                 <input type="text" name="firstname" defaultValue={student.firstname} required={true} onChange ={(e) => handleChange(e)}/>

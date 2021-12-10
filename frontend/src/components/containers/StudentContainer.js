@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchStudentThunk, editStudentThunk } from "../../store/thunks";
+import { fetchStudentThunk, editStudentThunk, deleteStudentThunk } from "../../store/thunks";
 import { StudentView } from "../views";
 import { EditStudentView } from "../views";
 import { Redirect } from 'react-router-dom';
@@ -47,13 +47,18 @@ class StudentContainer extends Component {
     }
   }
 
+  handleDelete = async event => {
+    this.props.deleteStudent(event)
+    this.setState({
+      redirect: true,
+    })
+  }
+
   handleSubmit = async event => {
     event.preventDefault();
-    if(this.state.campusId === "") {
-      this.setState({
-        campusId: null
-      })
-    }
+    this.setState({
+      edit: false
+    })
     let student = {
       id: this.props.match.params.id,
       firstname: this.state.firstname,
@@ -72,8 +77,12 @@ class StudentContainer extends Component {
   }
 
   render() {
+    //attempting to redirect back to student view does not work
+    // if(this.state.redirect && this.state.redirectId !== null) {
+    //   return (<Redirect to={`/student/${this.state.redirectId}`}/>)
+    // }
     if(this.state.redirect) {
-      return (<Redirect to={`/students`}/>)
+      return (<Redirect to={`/students/`}/>)
     }
     if(this.state.edit) {
       return (<EditStudentView
@@ -89,6 +98,7 @@ class StudentContainer extends Component {
         <StudentView 
           student={this.props.student}
           handleEdit={this.handleEdit}
+          handleDelete={this.handleDelete}
         />
       );
     }
@@ -106,7 +116,8 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchStudent: (id) => dispatch(fetchStudentThunk(id)),
-    editStudent: (student) => dispatch(editStudentThunk(student))
+    editStudent: (student) => dispatch(editStudentThunk(student)),
+    deleteStudent: (id) => dispatch(deleteStudentThunk(id))
   };
 };
 

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import '../css/Navbar.css'
 
 const StudentView = (props) => {
-  const { student, handleEdit} = props;
+  const { student, handleEdit, handleDelete} = props;
 
   function checkCampus(e) {
     if(e !== null) {
@@ -45,12 +45,15 @@ const StudentView = (props) => {
             </Link>
           </Toolbar>
         </AppBar>
-      <h1>Name: {student.firstname + " " + student.lastname}</h1>
-      <img src={student.imageUrl} alt="profile"></img>
-      {checkCampus(student.campus)}
-      <h3>Email: {student.email}</h3>
-      <h3>GPA: {student.gpa}</h3>
-      <button onClick={handleEdit}>Edit</button>
+        <div style={{marginLeft: 5+"vw", marginTop: 2+"vh"}}>
+          <h1>Name: {student.firstname + " " + student.lastname}</h1>
+          <img src={student.imageUrl} alt="profile"></img>
+          {checkCampus(student.campus)}
+          <h3>Email: {student.email}</h3>
+          <h3>GPA: {student.gpa}</h3>
+          <button class="btn btn-warning" onClick={handleEdit}>Edit</button>
+          <button class="btn btn-danger" onClick={() => {handleDelete(student.id)}}>X</button>
+        </div>
     </div>
   );
 };
