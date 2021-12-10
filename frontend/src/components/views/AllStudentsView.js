@@ -68,15 +68,17 @@ const AllStudentsView = (props) => {
           <Link to={`/student/${student.id}`}>
             <h1>{name}</h1>
           </Link>
-          <img src={student.imageUrl} alt="img crashed" style={{height: 20+"%", width: 20+"%"}}></img>
+          <button className="btn btn-danger" onClick={() => deleteStudent(student.id)}>X</button>
           <br/>
-          <button onClick={() => deleteStudent(student.id)}>X</button>
+          <img src={student.imageUrl} alt="img crashed" style={{height: 5+"%", width: 5+"%"}}></img>
+          <br/><br/><br/><br/>
           </div>
+          
         );
       }
       )}
       <Link to={`/newstudent`}>
-        <button>Add New Student</button>
+        <button className='btn btn-primary'>Add New Student</button>
       </Link>
     </div>
   );

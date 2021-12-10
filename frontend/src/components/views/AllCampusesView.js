@@ -11,10 +11,11 @@ import '../css/Navbar.css'
 
 const AllCampusesView = (props) => {
 
-  const { deleteCampus } = props;
+  const { deleteCampus} = props;
+  console.log(props);
 
   if (!props.allCampuses.length) {
-    return <div>
+    return ( <div>
         <AppBar position="static" elevation={0} className="AppBar">
           <Toolbar>
             <Typography variant="h6" className="title">
@@ -38,7 +39,8 @@ const AllCampusesView = (props) => {
         <Link to={`/newcampus`}>
           <button>Add New Campus</button>
         </Link>
-    </div>;
+    </div>
+    );
   }
 
   return (
@@ -68,15 +70,18 @@ const AllCampusesView = (props) => {
               <Link to={`/campus/${campus.id}`}>
                 <h1>{campus.name}</h1>
               </Link>
-              <span>Image: <br/> </span>
+              <button className="btn btn-danger" onClick={() => deleteCampus(campus.id)}>X</button>
+              <br/><br/>
               <img src={campus.imageUrl} alt="img crashed" style={{height: 30+"%", width: 30+"%"}}></img>
               <br/>
               <p>Address: {campus.address}</p>
               <p>Description: {campus.description}</p>
-              <button onClick={() => deleteCampus(campus.id)}>Delete</button>
             </div>
           ))}
         </div>
+        <Link to={`/newcampus`}>
+          <button className='btn btn-primary'>Add New Campus</button>
+        </Link>
     </div>
   );
 };
