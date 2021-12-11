@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import '../css/Navbar.css'
 
 const EditStudentView = (props) => {
-  const { student, handleEdit, handleChange, handleSubmit} = props;
+  const { student, edit, handleChange, handleSubmit} = props;
   return (
     <div>
       <AppBar position="static" elevation={0} className="AppBar">
@@ -51,9 +51,9 @@ const EditStudentView = (props) => {
                 <label style={{color:'#11153e', fontWeight: 'bold'}}>GPA:  </label>
                     <input type="number" defaultValue={student.gpa} required={true} min="0.0" max="4.0" step=".1" name="gpa" onChange ={(e) => handleChange(e)}/>
                 <br/>
-                <button type="submit">Submit</button>
+                <button className='btn btn-primary' type="submit">Submit</button>
             </form>
-            <button onClick={handleEdit}>Cancel</button>
+            <button className='btn btn-default' onClick={edit}>Cancel</button>
        </div>
     </div>
   );

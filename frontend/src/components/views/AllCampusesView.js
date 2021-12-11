@@ -12,7 +12,6 @@ import '../css/Navbar.css'
 const AllCampusesView = (props) => {
 
   const { deleteCampus} = props;
-  console.log(props);
 
   if (!props.allCampuses.length) {
     return ( <div>

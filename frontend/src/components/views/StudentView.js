@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import '../css/Navbar.css'
 
 const StudentView = (props) => {
-  const { student, handleEdit, handleDelete} = props;
+  const { student, edit, handleDelete} = props;
 
   function checkCampus(e) {
     if(e !== null) {
@@ -51,8 +51,8 @@ const StudentView = (props) => {
           {checkCampus(student.campus)}
           <h3>Email: {student.email}</h3>
           <h3>GPA: {student.gpa}</h3>
-          <button class="btn btn-warning" onClick={handleEdit}>Edit</button>
-          <button class="btn btn-danger" onClick={() => {handleDelete(student.id)}}>X</button>
+          <button className="btn btn-warning" onClick={edit}>Edit</button>
+          <button className="btn btn-danger" onClick={() => {handleDelete(student.id)}}>X</button>
         </div>
     </div>
   );

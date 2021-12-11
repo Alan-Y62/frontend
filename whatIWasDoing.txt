@@ -1,6 +1,0 @@
-In the process of deciding how to handle edit student functionality.
-First idea put it in single student view without changing to a form 
-page.
-    -Would need to add handlesubmit and handlechange to single student
-    container or maybe inside view itself
-    -connect it to editStudentThunk

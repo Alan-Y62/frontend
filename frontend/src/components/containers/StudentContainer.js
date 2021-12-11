@@ -16,6 +16,7 @@ class StudentContainer extends Component {
       imageUrl: this.props.match.imageUrl,
       email: this.props.match.email,
       campusId: this.props.match.campusId,
+      campus: this.props.match.campus,
       gpa: this.props.match.gpa,
       redirect: false, 
       redirectId: null,
@@ -28,23 +29,16 @@ class StudentContainer extends Component {
     this.props.fetchStudent(this.props.match.params.id);
   }
 
-  handleChange = event => {
-    this.setState({
+  handleChange = async event => {
+    await this.setState({
       [event.target.name]: event.target.value
     });
   }
 
-  handleEdit = () => {
-    if(this.state.edit) {
-      this.setState({
-        edit: false
-      })
-    }
-    else {
-      this.setState({
-        edit: true
-      })
-    }
+  edit = () => {
+    this.setState(state => {
+      return{ edit: !state.edit}
+    })
   }
 
   handleDelete = async event => {
@@ -59,12 +53,21 @@ class StudentContainer extends Component {
     this.setState({
       edit: false
     })
+
+    if(!this.state.campusId || this.state.campusId === "") {
+      this.setState({
+        campus: null,
+        campusId: null
+      })
+    }
+
     let student = {
       id: this.props.match.params.id,
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       imageUrl: this.state.imageUrl,
       email: this.state.email,
+      campus: this.state.campus,
       campusId: this.state.campusId,
       gpa: this.state.gpa
     };
@@ -89,7 +92,7 @@ class StudentContainer extends Component {
         student={this.props.student}
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
-        handleEdit={this.handleEdit}
+        edit={this.edit}
       />
       )
     }
@@ -97,7 +100,7 @@ class StudentContainer extends Component {
       return (  
         <StudentView 
           student={this.props.student}
-          handleEdit={this.handleEdit}
+          edit={this.edit}
           handleDelete={this.handleDelete}
         />
       );
