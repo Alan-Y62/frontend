@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchStudentThunk, editStudentThunk, deleteStudentThunk } from "../../store/thunks";
 import { StudentView } from "../views";
-import { EditStudentView } from "../views";
 import { Redirect } from 'react-router-dom';
 
 
@@ -11,16 +10,16 @@ class StudentContainer extends Component {
   constructor(props){
     super(props);
     this.state = {
-      firstname: this.props.match.firstname, 
-      lastname: this.props.match.lastname,
-      imageUrl: this.props.match.imageUrl,
-      email: this.props.match.email,
-      campusId: this.props.match.campusId,
-      campus: this.props.match.campus,
-      gpa: this.props.match.gpa,
+      id: null,
+      firstname: "", 
+      lastname: "",
+      imageUrl: "",
+      email: "",
+      campusId: null,
+      gpa: null,
       redirect: false, 
       redirectId: null,
-      edit: false
+      editState: false
     };
   }
 
@@ -37,7 +36,16 @@ class StudentContainer extends Component {
 
   edit = () => {
     this.setState(state => {
-      return{ edit: !state.edit}
+      return{ 
+        editState: !state.editState,
+        id: this.props.student.id,
+        firstname: this.props.student.firstname, 
+        lastname: this.props.student.lastname,
+        imageUrl: this.props.student.imageUrl,
+        email: this.props.student.email,
+        campusId: this.props.student.campusId,
+        gpa: this.props.student.gpa
+      }
     })
   }
 
@@ -51,12 +59,11 @@ class StudentContainer extends Component {
   handleSubmit = async event => {
     event.preventDefault();
     this.setState({
-      edit: false
+      editState: false
     })
 
     if(!this.state.campusId || this.state.campusId === "") {
       this.setState({
-        campus: null,
         campusId: null
       })
     }
@@ -84,27 +91,20 @@ class StudentContainer extends Component {
     // if(this.state.redirect && this.state.redirectId !== null) {
     //   return (<Redirect to={`/student/${this.state.redirectId}`}/>)
     // }
+    let editState = this.state.editState
     if(this.state.redirect) {
       return (<Redirect to={`/students/`}/>)
     }
-    if(this.state.edit) {
-      return (<EditStudentView
+    return (  
+      <StudentView 
         student={this.props.student}
+        editState={editState}
+        edit={this.edit}
+        handleDelete={this.handleDelete}
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
-        edit={this.edit}
       />
-      )
-    }
-    else {
-      return (  
-        <StudentView 
-          student={this.props.student}
-          edit={this.edit}
-          handleDelete={this.handleDelete}
-        />
-      );
-    }
+    );
   }
 }
 
