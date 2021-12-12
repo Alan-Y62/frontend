@@ -5,7 +5,7 @@ import { fetchCampusThunk,
   fetchAllStudentsThunk 
 } from "../../store/thunks";
 import { Redirect } from 'react-router-dom';
-import { EditCampusView } from "../views";
+import { EditCampusView, } from "../views";
 
 class EditCampusContainer extends Component {
 

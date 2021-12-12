@@ -1,24 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchStudentThunk, editStudentThunk, deleteStudentThunk, fetchAllCampusesThunk } from "../../store/thunks";
-import { StudentView } from "../views";
+import { fetchStudentThunk, editStudentThunk, fetchAllCampusesThunk } from "../../store/thunks";
+import { EditStudentView } from "../views";
 import { Redirect } from 'react-router-dom';
 
-
-class StudentContainer extends Component {
+class EditStudentContainer extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      id: null,
-      firstname: "", 
-      lastname: "",
-      imageUrl: "",
-      email: "",
-      gpa: null,
+      id: this.props.student.id,
+      firstname: this.props.student.firstname, 
+      lastname: this.props.student.lastname,
+      imageUrl: this.props.student.imageUrl,
+      email: this.props.student.email,
+      gpa: this.props.student.gpa,
       redirect: false, 
       redirectId: null,
-      editState: false
     };
   }
 
@@ -32,28 +30,6 @@ class StudentContainer extends Component {
     await this.setState({
       [event.target.name]: event.target.value
     });
-  }
-
-  edit = () => {
-    this.setState(state => {
-      return{ 
-        editState: !state.editState,
-        id: this.props.student.id,
-        firstname: this.props.student.firstname, 
-        lastname: this.props.student.lastname,
-        imageUrl: this.props.student.imageUrl,
-        email: this.props.student.email,
-        campusId: this.props.student.campusId,
-        gpa: this.props.student.gpa
-      }
-    })
-  }
-
-  handleDelete = async event => {
-    this.props.deleteStudent(event)
-    this.setState({
-      redirect: true,
-    })
   }
 
   handleSubmit = async event => {
@@ -86,21 +62,14 @@ class StudentContainer extends Component {
 
   render() {
     //attempting to redirect back to student view does not work
-    // if(this.state.redirect && this.state.redirectId !== null) {
-    //   return (<Redirect to={`/student/${this.state.redirectId}`}/>)
-    // }
-    let editState = this.state.editState
     if(this.state.redirect) {
-      return (<Redirect to={`/students/${this.state.redirectId}`}/>)
+        return (<Redirect to={`/student/${this.state.redirectId}`}/>)
     }
     return (  
-      <StudentView 
+      <EditStudentView 
         student={this.props.student}
-        editState={editState}
-        edit={this.edit}
-        handleDelete={this.handleDelete}
-        handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
+        handleChange={this.handleChange}
         allCampuses={this.props.allCampuses}
       />
     );
@@ -120,9 +89,8 @@ const mapDispatch = (dispatch) => {
   return {
     fetchStudent: (id) => dispatch(fetchStudentThunk(id)),
     editStudent: (student) => dispatch(editStudentThunk(student)),
-    deleteStudent: (id) => dispatch(deleteStudentThunk(id)),
     fetchAllCampuses: () => dispatch(fetchAllCampusesThunk())
   };
 };
 
-export default connect(mapState, mapDispatch)(StudentContainer);
+export default connect(mapState, mapDispatch)(EditStudentContainer);
