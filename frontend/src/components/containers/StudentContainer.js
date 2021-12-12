@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchStudentThunk, editStudentThunk, deleteStudentThunk, fetchAllCampusesThunk } from "../../store/thunks";
+import { fetchStudentThunk, deleteStudentThunk } from "../../store/thunks";
 import { StudentView } from "../views";
-import { Redirect } from 'react-router-dom';
 
 
 class StudentContainer extends Component {
@@ -25,7 +24,6 @@ class StudentContainer extends Component {
   componentDidMount() {
     //getting student ID from url
     this.props.fetchStudent(this.props.match.params.id);
-    this.props.fetchAllCampuses();
   }
 
   handleChange = async event => {
@@ -85,23 +83,10 @@ class StudentContainer extends Component {
   }
 
   render() {
-    //attempting to redirect back to student view does not work
-    // if(this.state.redirect && this.state.redirectId !== null) {
-    //   return (<Redirect to={`/student/${this.state.redirectId}`}/>)
-    // }
-    let editState = this.state.editState
-    if(this.state.redirect) {
-      return (<Redirect to={`/students/${this.state.redirectId}`}/>)
-    }
     return (  
       <StudentView 
         student={this.props.student}
-        editState={editState}
-        edit={this.edit}
         handleDelete={this.handleDelete}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        allCampuses={this.props.allCampuses}
       />
     );
   }
@@ -119,9 +104,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchStudent: (id) => dispatch(fetchStudentThunk(id)),
-    editStudent: (student) => dispatch(editStudentThunk(student)),
     deleteStudent: (id) => dispatch(deleteStudentThunk(id)),
-    fetchAllCampuses: () => dispatch(fetchAllCampusesThunk())
   };
 };
 

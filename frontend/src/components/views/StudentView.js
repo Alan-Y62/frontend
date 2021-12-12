@@ -32,6 +32,12 @@ const StudentView = (props) => {
               CRUD App
             </Typography>
 
+            <Link className="id" to={'/'} >
+              <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
+                Home
+              </Button>
+            </Link>
+
             <Link className="id" to={'/campuses'} >
               <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
                 All Campuses

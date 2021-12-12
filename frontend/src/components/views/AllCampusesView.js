@@ -13,56 +13,14 @@ const AllCampusesView = (props) => {
 
   const { deleteCampus} = props;
 
-  if (!props.allCampuses.length) {
-    return ( <div>
-        <AppBar position="static" elevation={0} className="AppBar">
-          <Toolbar>
-            <Typography variant="h6" className="title">
-              CRUD App
-            </Typography>
-
-            <Link className="id" to={'/campuses'} >
-              <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
-                All Campuses
-              </Button>
-            </Link>
-
-            <Link className="id" to={'/students'} >
-              <Button variant="contained" color="primary">
-                All Students
-              </Button>
-            </Link>
-          </Toolbar>
-        </AppBar>
-        <h1>There are no campuses.</h1>
-        <Link to={`/newcampus`}>
-          <button>Add New Campus</button>
-        </Link>
-    </div>
-    );
-  }
-
-  return (
-    <div>
-      <AppBar position="static" elevation={0} className="AppBar">
-          <Toolbar>
-            <Typography variant="h6" className="title">
-              CRUD App
-            </Typography>
-
-            <Link className="id" to={'/campuses'} >
-              <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
-                All Campuses
-              </Button>
-            </Link>
-
-            <Link className="id" to={'/students'} >
-              <Button variant="contained" color="primary">
-                All Students
-              </Button>
-            </Link>
-          </Toolbar>
-        </AppBar>
+  function showCampus() {
+    if(!props.allCampuses.length) {
+      return(
+        <h1>There are no campuses</h1>
+      )
+    }
+    else {
+      return(
         <div>
           {props.allCampuses.map((campus) => (
             <div key={campus.id}> 
@@ -78,6 +36,38 @@ const AllCampusesView = (props) => {
             </div>
           ))}
         </div>
+      )
+    }
+  }
+
+  return (
+    <div>
+      <AppBar position="static" elevation={0} className="AppBar">
+          <Toolbar>
+            <Typography variant="h6" className="title">
+              CRUD App
+            </Typography>
+
+            <Link className="id" to={'/'} >
+              <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
+                Home
+              </Button>
+            </Link>
+
+            <Link className="id" to={'/campuses'} >
+              <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
+                All Campuses
+              </Button>
+            </Link>
+
+            <Link className="id" to={'/students'} >
+              <Button variant="contained" color="primary">
+                All Students
+              </Button>
+            </Link>
+          </Toolbar>
+        </AppBar>
+        {showCampus()}
         <Link to={`/newcampus`}>
           <button className='btn btn-primary'>Add New Campus</button>
         </Link>

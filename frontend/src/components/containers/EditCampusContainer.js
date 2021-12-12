@@ -45,7 +45,7 @@ class EditCampusContainer extends Component {
   
     handleSubmit = async event => {
       event.preventDefault();
-  
+      console.log(event.target.id.value)
       let campus = {
         id: this.props.match.params.id,
         name: this.state.name,

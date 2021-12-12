@@ -9,7 +9,7 @@ import '../css/Navbar.css'
 import '../css/Singlecamp.css'
 
 const CampusView = (props) => {
-  const {campus, students, removeStudent} = props;
+  const {campus, students, removeStudent, addStudent} = props;
   return (
     <div>
     <AppBar position="static" elevation={0} className="AppBar">
@@ -17,6 +17,12 @@ const CampusView = (props) => {
             <Typography variant="h6" className="title">
               CRUD App
             </Typography>
+
+            <Link className="id" to={'/'} >
+              <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
+                Home
+              </Button>
+            </Link>
 
             <Link className="id" to={'/campuses'} >
               <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
@@ -43,11 +49,11 @@ const CampusView = (props) => {
         </div>
         <div className="col">
           <p>List of Students at this campus</p>
-          <ul>
+          <ul style={{listStyleType: "none"}}>
           {students.map( student => {
             let name = student.firstname + " " + student.lastname;
             return (
-              <div key={student.id}>
+              <div style={{fontSize: 20+"px"}} key={student.id}>
                 <Link to={`/student/${student.id}`}>
                   <li key={student.id}>{name}</li>
                 </Link>
@@ -56,6 +62,22 @@ const CampusView = (props) => {
             );
           })}
           </ul>
+        </div>
+        <div className="col">
+          <h3> Add Students to Campus</h3>
+          {props.allStudents.map(student => {
+                let name = student.firstname+" "+student.lastname
+                if(!student.campusId) {
+                  return (
+                    <div key={student.id}>
+                      <Link to={`/student/${student.id}`}>
+                      <p name={student.id}>{name}</p>
+                      </Link>
+                      <button className='btn btn-primary' onClick={() => addStudent(student)}>Add</button>
+                    </div>
+                  )
+                }
+          })}
         </div>
       </div>
     </div>

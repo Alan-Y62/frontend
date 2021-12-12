@@ -48,6 +48,12 @@ const HomePageView = () => {
             CRUD App
           </Typography>
 
+          <Link className="id" to={'/'} >
+            <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
+              Home
+            </Button>
+          </Link>
+
           <Link className={classes.links} to={'/campuses'} >
             <Button variant="contained" color="primary" style={{marginRight: '10px'}}>
               All Campuses
